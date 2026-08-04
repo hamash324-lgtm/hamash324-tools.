@@ -1,35 +1,29 @@
 import os
 
-index_path = "index.html"
-if not os.path.exists(index_path):
-    index_path = "src/index.html"
-
-with open(index_path, "r", encoding="utf-8") as f:
-    content = f.read()
-
-# بطاقة الأداة الجديدة التي ستضاف بجانب الأدوات الأخرى
-apk_card = """
-        <!-- أداة فك وتعديل APK -->
-        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6 shadow-lg">
-            <h2 class="text-xl font-bold text-cyan-400 mb-2">أداة فك وتعديل تطبيقات APK</h2>
-            <p class="text-gray-300 mb-4">فك حزمة التطبيقات، استخراج الموارد وملفات الـ Smali، وإعادة البناء والتوقيع الرقمي للتثبيت المباشر.</p>
-            <a href="apk-tool.html" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-gray-950 font-bold px-6 py-2 rounded-lg transition">
-                افتح الأداة وابدأ العمل
-            </a>
+html_content = """<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamash Tools</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-900 text-white p-6">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Available Utility & Code Tools</h1>
+        
+        <!-- APK Signer & Editor Tool -->
+        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 mt-4">
+            <h3 class="text-white font-bold text-lg">APK Editor & Signer</h3>
+            <p class="text-gray-400 text-sm mt-1">تعديل تطبيقات APK وتوقيعها بشهادة جديدة لتصبح جاهزة للتثبيت.</p>
+            <button onclick="alert('جارٍ فتح أداة التعديل والتوقيع...');" class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">افتح الأداة وقُم بتحميل الإعدادات</button>
         </div>
+    </div>
+</body>
+</html>
 """
 
-# إذا لم تكن الأداة موجودة مسبقاً، أضفها قبل إغلاق الوسم المناسب أو في نهاية قسم الأدوات
-if "apk-tool.html" not in content:
-    # نبحث عن مكان مناسب لإدراجها (مثلا قبل نهاية الـ body أو في قسم الأدوات)
-    if "<!-- الأدوات المساعدة -->" in content:
-        content = content.replace("<!-- الأدوات المساعدة -->", "<!-- الأدوات المساعدة -->" + apk_card)
-    else:
-        # إضافتها قبل نهاية الصفحة
-        content = content.replace("</body>", apk_card + "\n</body>")
-    
-    with open(index_path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print("[+] تم إضافة أداة الـ APK إلى الموقع بنجاح!")
-else:
-    print("[!] الأداة مضافة مسبقاً في الموقع.")
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("تم تحديث الملف وإضافة الأداة بنجاح!")
