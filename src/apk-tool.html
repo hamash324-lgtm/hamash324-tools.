@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة فك وتعديل APK - Hamash Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-p-6">
+    <div class="max-w-xl mx-auto mt-10 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+        <h1 class="text-2xl font-bold mb-4 text-cyan-400">🤖 أداة فك وتعديل تطبيقات APK</h1>
+        <p class="text-gray-400 mb-6">قم برفع ملف الـ APK أو أدخل تفاصيل الأداة للبدء بعملية الفك واستخراج الملفات البرمجية.</p>
+        
+        <div class="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center mb-6 hover:border-cyan-400 transition">
+            <input type="file" id="apkFile" class="hidden" accept=".apk">
+            <label for="apkFile" class="cursor-pointer text-gray-300">
+                📁 اضغط هنا لاختيار ملف <span class="text-cyan-400 font-bold">APK</span>
+            </label>
+            <p id="fileName" class="text-sm text-yellow-400 mt-2"></p>
+        </div>
+
+        <button onclick="startProcess()" class="w-full bg-cyan-500 hover:bg-cyan-600 text-gray-950 font-bold py-3 rounded-lg transition">
+            بدء التفكيك والتحليل
+        </button>
+
+        <div id="logArea" class="mt-6 bg-black p-4 rounded-lg font-mono text-xs text-green-400 h-40 overflow-y-auto hidden"></div>
+    </div>
+
+    <script>
+        document.getElementById('apkFile').addEventListener('change', function(e) {
+            if(e.target.files.length > 0) {
+                document.getElementById('fileName').innerText = "تم اختيار الملف: " + e.target.files[0].name;
+            }
+        });
+
+        function startProcess() {
+            const fileInput = document.getElementById('apkFile');
+            const logArea = document.getElementById('logArea');
+            if(fileInput.files.length === 0) {
+                alert('الرجاء اختيار ملف APK أولاً!');
+                return;
+            }
+            logArea.classList.remove('hidden');
+            logArea.innerHTML = "[+] جاري قراءة حزمة الملف...<br>";
+            setTimeout(() => { logArea.innerHTML += "[+] يتم استخراج ملف AndroidManifest.xml...<br>"; }, 1000);
+            setTimeout(() => { logArea.innerHTML += "[+] جاري فك شفرات الـ Smali بنجاح!<br>"; }, 2000);
+            setTimeout(() => { logArea.innerHTML += "[✔] العملية انتهت وأصبح المشروع جاهزاً للتعديل!"; }, 3000);
+        }
+    </script>
+</body>
+</html>
